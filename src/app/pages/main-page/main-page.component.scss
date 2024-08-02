@@ -1,0 +1,131 @@
+$primary-color: #010d4d;
+$secondary-color: #dedede;
+
+.main {
+  width: 100%;
+  height: 100%;
+}
+.rooms-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.room {
+  display: flex;
+  justify-content: flex-start;
+  width: 80%;
+  height: 27vh;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  img {
+    height: 100%;
+    width: 30%;
+    object-fit: cover;
+  }
+}
+.location-text {
+  display: flex;
+  align-items: center;
+  img {
+    width: 18px;
+    height: 18px;
+  }
+}
+.room-information {
+  display: flex;
+  flex-direction: column;
+  h3 {
+    font-size: 20px;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    font-size: 11px;
+    color: #424242;
+    cursor: pointer;
+  }
+}
+.room-name-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  app-star-rating {
+    margin-bottom: -7px;
+  }
+}
+span {
+  font-size: 14px;
+}
+.short-description {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+* {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.text-side {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2%;
+}
+.manage-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  .price {
+    color: $primary-color;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .favourite-img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: auto;
+    align-self: flex-end;
+  }
+  p {
+    font-size: 12px;
+    color: #424242;
+    cursor: pointer;
+    margin:  0 0 15px 0;
+  }
+  button {
+    background-color: $primary-color;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    width: 25vh;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+  button:hover {
+    background-color: #06068d;
+  }
+}
+
+::ng-deep {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $secondary-color;
+  }
+}

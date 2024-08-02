@@ -1,0 +1,259 @@
+$primary-color: #010d4d;
+$secondary-color: #ffffff;
+
+.file-form {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: $secondary-color;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: $primary-color;
+}::placeholder {
+  color: $primary-color;
+}
+.description-input {
+  height: 15vh;
+  width: 100%;
+  margin-top: 5px;
+  margin-left: -10px;
+  padding: 10px;
+  border: none;
+  resize: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}:focus {
+  outline: none;
+ }
+
+
+
+input:focus {
+  outline: none;
+}
+input.ng-touched.ng-invalid {
+  border-color: red;
+}
+
+.error {
+  margin-left: -10px;
+  margin-top: 3px;
+  color: red;
+  align-self: flex-start;
+  font-size: 11px;
+}
+
+* {
+  font-family: "Lato", sans-serif;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  align-items: center;
+}
+
+button {
+  padding: 10px;
+  width: 30%;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  color: $primary-color;
+  transition: 0.5s;
+  font-weight: 600;
+  background-color: $secondary-color;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+button:hover {
+  background-color: #eeeeee;
+}
+img {
+  width: 34px;
+  height: 34px;
+}
+
+.dropzone {
+  cursor: pointer;
+  border-radius: 5px;
+  border: dashed 1px $primary-color;
+  display: flex;
+  width: 80%;
+  height: 20vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &.fileover {
+    border-color: $primary-color;
+  }
+
+  input {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 95%;
+    height: 85%;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  h3 {
+    margin: 0;
+  }
+  label {
+    cursor: pointer;
+  }
+}
+
+.files-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 200px;
+  align-items: center;
+  overflow-y: auto;
+}
+
+
+.file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  width: 70%;
+  margin-bottom: 15px;
+  .left-side {
+    display: flex;
+    align-items: center;
+    h3 {
+      margin-left: 5px;
+      font-size: 15px;
+    }
+  }
+  button {
+    background-color: red;
+    width: 24px;
+    height: 24px;
+    padding:  5px 0 5px 0;
+    align-self: center;
+    img {
+      width: 80%;
+      height: 80%;
+    }
+  }
+}
+.error-file {
+  color: red;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+
+::ng-deep {
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $secondary-color;
+  }
+}
+
+.field-info {
+  span {
+    font-weight: 600;
+    margin-left: -10px;
+  }
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  input {
+    margin: 5px;
+    align-self: center;
+  }
+}
+
+
+
+.details-info {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  align-items: flex-start;
+}
+.info-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
+  input {
+    margin: 0;
+    text-align: center;
+  }
+  .error {
+    align-self: center;
+    margin-left: 0;
+  }
+}
+.rooms {
+  background-image: url("/assets/img/bed.svg");
+}
+.price {
+  background-image: url("/assets/img/coin.svg");
+}
+
+.choose {
+  background-size: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 20%;
+}
+.choose:focus,
+.choose:not(:placeholder-shown) {
+  background-image: none;
+}
+
+.map-container {
+  border-radius: 10px;
+  overflow: hidden;
+  height: 250px;
+  width: 500px;
+  .map-text {
+    font-weight: 600;
+  }
+}
+
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+}
+.address-text {
+  font-size: 13px;
+  color: #707070;
+}
+.map-error {
+  color: red;
+  margin-bottom: 3px;
+  font-size: 11px;
+}
+
+

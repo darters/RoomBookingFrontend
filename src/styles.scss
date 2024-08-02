@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+$primary-color: #010d4d;
+$secondary-color: #ffffff;
+
+header {
+  * {
+    font-family: "Lato", sans-serif;
+  }
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  h3 {
+    color:#010d4d;
+    font-size: 22px;
+    font-weight: 900;
+    margin: 0;
+  }
+  .controls-block {
+    display: flex;
+    gap: 10px;
+  }
+  a, span {
+    text-decoration: none;
+    color: #010d4d;
+    font-size: 15px;
+    font-weight: 700;
+  }
+}
+
+
+::ng-deep {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $secondary-color;
+  }
+}

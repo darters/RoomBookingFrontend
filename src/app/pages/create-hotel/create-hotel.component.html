@@ -1,0 +1,82 @@
+<div class="main">
+  <ng-form class="file-form" (ngSubmit)="submit()" [formGroup]="createHotelForm">
+    <div class="form">
+      <div class="dropzone">
+        <img alt="upload file" src="/assets/img/upload-file.svg">
+
+        <input accept=".jpg, .jpeg" type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event)">
+
+
+        <h3>Drag and drop file here</h3>
+        <h3>or</h3>
+        <label for="fileDropRef">Browse for file</label>
+      </div>
+      <div class="files-container">
+        <div class="error-file" *ngIf="!isValidFilesType">Incorrect file type, must be jpg, jpeg</div>
+        <div class="error-file" *ngIf="!isValidFilesCount">
+          Files must be more 4, and less 20
+        </div>
+        <div class="file" *ngFor="let file of files">
+          <div class="left-side">
+            <img src="/assets/img/file.svg" alt="file">
+            <h3>{{ file.name }}</h3>
+          </div>
+          <button (click)="removeFile(file)"><img src="/assets/img/cross.svg"> </button>
+        </div>
+      </div>
+      <div class="field-info">
+        <span>Title</span>
+        <input formControlName="title" placeholder="Title">
+        <div class="error" *ngIf="createHotelForm.controls['title'].errors && createHotelForm.controls['title']?.['touched']">
+          Title must be more than 2, and less than 35
+        </div>
+      </div>
+      <div class="field-info">
+        <span>Description</span>
+        <textarea formControlName="description" class="description-input" placeholder="Description"></textarea>
+        <div class="error" *ngIf="createHotelForm.controls['description'].errors && createHotelForm.controls['description']?.['touched']">
+          Description must be more than 100, and less than 300
+        </div>
+      </div>
+      <div class="details-info">
+        <div class="info-column">
+          <span>Rooms</span>
+          <input formControlName="rooms" placeholder="" class="rooms choose">
+          <div class="error" *ngIf="createHotelForm.controls['rooms'].errors && createHotelForm.controls['rooms']?.['touched']">
+            The field is required
+          </div>
+        </div>
+        <div class="info-column">
+          <span>Price a night $</span>
+          <input formControlName="price" placeholder="" class="price choose">
+          <div class="error" *ngIf="createHotelForm.controls['price'].errors && createHotelForm.controls['price']?.['touched']">
+            The field is required
+          </div>
+        </div>
+       </div>
+
+      <div class="map-block">
+        <div class="location-info">
+          <span class="map-text">Choose where are you apartment: </span>
+          <span class="address-text">{{ address }}</span>
+          <div class="map-error" *ngIf="!isValidAddress">The field is required</div>
+
+        </div>
+        <div class="map-container">
+          <google-map
+            height="100%"
+            width="100%"
+            [center]="center"
+            [zoom]="zoom"
+            [options]="options"
+            (mapClick)="onMapClick($event)"></google-map>
+        </div>
+
+      </div>
+      <!--      <div class="error" *ngIf="!isValidAddress">ERROR</div>-->
+      <button class="main-btn" (click)="submit()" type="submit">SEND</button>
+    </div>
+  </ng-form>
+</div>
+
+
