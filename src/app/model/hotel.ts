@@ -5,8 +5,10 @@ export interface Hotel {
   photoUrl: string;
   numberOfRooms: number;
   roomRating: number;
-  price: number;
+  pricePerDay: number;
   latitude: number;
   longitude: number;
-  location: string;
+  city: string;
+  isFavorite: boolean;
+  photosUrl: string[]
 }

@@ -26,4 +26,7 @@ export class HotelService {
 
     return this.httpClient.post(this.url + 'create', formData)
   }
+  public addToFavorites(roomId: number) {
+    // return this.httpClient.
+  }
 }

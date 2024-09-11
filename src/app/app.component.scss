@@ -1,1 +1,75 @@
+$primary-color: #010d4d;
+$secondary-color: #ffffff;
 
+header {
+  * {
+    font-family: "Lato", sans-serif;
+  }
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  .site-name {
+    color:#010d4d;
+    font-size: 22px;
+    font-weight: 900;
+    margin: 0;
+  }
+
+  .left-side {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .auth-controls-block {
+    display: flex;
+    gap: 10px;
+  }
+  .site-control {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    a {
+      display: flex;
+      align-items: center;
+      img {
+        margin-left: 3px;
+        align-self: end;
+      }
+    }
+
+    button {
+      border-radius: 5px;
+      background-color: $primary-color;
+      border: none;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 10px;
+      font-weight: 800;
+      color: $secondary-color;
+      cursor: pointer;
+    }
+  }
+
+  a, span {
+    text-decoration: none;
+    color: #010d4d;
+    font-size: 15px;
+    font-weight: 700;
+  }
+}
+
+
+::ng-deep {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: $secondary-color;
+  }
+}

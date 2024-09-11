@@ -1,51 +1,42 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {RouterOutlet} from "@angular/router";
 import {StarRatingComponent} from "../../star-rating/star-rating.component";
 import {TextCutPipe} from "../../pipes/text-cut.pipe";
-import {HotelService} from "../../service/hotel.service";
 import {Hotel} from "../../model/hotel";
+import EventEmitter from "events";
 
 @Component({
-  selector: 'app-main-page',
+  selector: 'app-favorites',
   standalone: true,
   imports: [
     NgForOf,
-    RouterOutlet,
     StarRatingComponent,
     TextCutPipe,
     NgIf
   ],
-  templateUrl: './main-page.component.html',
-  styleUrl: './main-page.component.scss'
+  templateUrl: './favorites.component.html',
+  styleUrl: './favorites.component.scss'
 })
-export class MainPageComponent implements OnInit {
-  rating: number = 1.5;
-  firstPhoto: string = '';
-  rooms: Hotel[] = []
-  roomIsFavorite: boolean = false;
-  favorites: Hotel[] = []
+export class FavoritesComponent implements OnInit {
+  favoritesRooms!: any
+  rating: number = 1.5
+  favorites!: Hotel[]
+  @Output() newItemEvent = new EventEmitter<any>();
+  constructor() {
+  }
 
-  constructor(private hotelService: HotelService) {
-  }
   ngOnInit(): void {
-    this.getAll()
-  }
-  getAll() {
-    this.hotelService.getAllHotels().subscribe((hotels: any) => {
-      this.rooms = hotels
-      console.log(hotels)
-    })
+    // @ts-ignore
+    this.favorites = JSON.parse(sessionStorage.getItem('favorites'))
+    console.log(this.favorites)
   }
   addToFavorites(room: Hotel) {
     const key = 'favorites'
     if(!room.isFavorite) {
-      room.isFavorite = !room.isFavorite
       this.favorites.push(room)
       sessionStorage.setItem(key, JSON.stringify(this.favorites));
       console.log(sessionStorage.getItem(key))
     } else {
-      room.isFavorite = !room.isFavorite
       this.favorites = this.favorites.filter((r: Hotel) => r.id != room.id)
       // @ts-ignore
       sessionStorage.setItem(key, JSON.stringify(this.favorites))
@@ -53,5 +44,7 @@ export class MainPageComponent implements OnInit {
       console.log("UPDATED " + sessionStorage.getItem(key))
     }
     console.log("ROOOOOM STATUS " + room.isFavorite)
+    room.isFavorite = !room.isFavorite
+
   }
 }

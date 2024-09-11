@@ -1,6 +1,6 @@
 <div class="main">
   <div class="rooms-container">
-    <div *ngFor="let room of rooms" class="room">
+    <div class="room" *ngFor="let room of rooms">
       <img src="{{room.photosUrl[0]}}">
       <!--      <img src="assets/img/hotel.jpg">-->
 
@@ -13,23 +13,22 @@
           </div>
           <div class="location-text">
             <img src="assets/img/locationpoint.svg"/>
-            <span>1.45km from center</span>
           </div>
           <p>reviews 140</p>
           <div class="short-description">
-            {{description | textCut: 350}}
+            {{room.description | textCut: 350}}
           </div>
 
         </div>
 
         <div class="manage-block">
-          <img class="favourite-img" src="assets/img/heartunfill.svg">
-          <span class="price">100$</span>
-          <p>a night</p>
+          <img (click)="addToFavorites(room)" class="favourite-img" *ngIf="!room.isFavorite" src="assets/img/heartunfill.svg">
+          <img (click)="addToFavorites(room)" class="favourite-img" *ngIf="room.isFavorite" src="assets/img/heartfill.svg">
+          <span class="price">{{ room.pricePerDay }}</span>
+          <p>per a night</p>
           <button>Go to site</button>
         </div>
       </div>
-
 
     </div>
   </div>

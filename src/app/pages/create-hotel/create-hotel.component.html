@@ -48,8 +48,8 @@
         </div>
         <div class="info-column">
           <span>Price a night $</span>
-          <input formControlName="price" placeholder="" class="price choose">
-          <div class="error" *ngIf="createHotelForm.controls['price'].errors && createHotelForm.controls['price']?.['touched']">
+          <input formControlName="pricePerDay" placeholder="" class="price choose">
+          <div class="error" *ngIf="createHotelForm.controls['pricePerDay'].errors && createHotelForm.controls['pricePerDay']?.['touched']">
             The field is required
           </div>
         </div>
@@ -63,13 +63,14 @@
 
         </div>
         <div class="map-container">
-          <google-map
-            height="100%"
+          <google-map #mapRef
+            hight="100%"
             width="100%"
             [center]="center"
             [zoom]="zoom"
             [options]="options"
-            (mapClick)="onMapClick($event)"></google-map>
+            (mapClick)="onMapClick($event)">
+          </google-map>
         </div>
 
       </div>
