@@ -1,0 +1,70 @@
+$primary-color: #010d4d;
+$secondary-color: #ffffff;
+$hover-color: #d0d0d0;
+
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+  padding: 11px 0 11px 0;
+  background-color: $primary-color;
+  font-family: "Montserrat", system-ui;
+  color: $secondary-color;
+  .header-container {
+    margin: 0 3% 0 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .links-block {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+}
+.link, span {
+  color: $secondary-color;
+  text-decoration: none;
+  transition: 0.5s;
+  font-size: 15px;
+  font-weight: 600;
+}
+.link:hover {
+  color: $hover-color;
+}
+.btn-create {
+  padding: 7px;
+  background-color: $secondary-color;
+  color: $primary-color;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+  font-family: "Montserrat", system-ui;
+}
+.btn-create:hover {
+   background-color: $hover-color;
+ }
+
+h2 {
+  margin: 0;
+}
+
+#btn-home {
+  cursor: pointer;
+  transition: 0.5s;
+}
+#btn-home:hover {
+  color: $hover-color;
+ }
+
+.active-router {
+  color: $hover-color;
+}
+.active-crt {
+  background-color: $hover-color;
+}
+
+

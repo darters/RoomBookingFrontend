@@ -5,6 +5,7 @@ import {StarRatingComponent} from "../../star-rating/star-rating.component";
 import {TextCutPipe} from "../../pipes/text-cut.pipe";
 import {HotelService} from "../../service/hotel.service";
 import {Hotel} from "../../model/hotel";
+import {GoogleMap} from "@angular/google-maps";
 
 @Component({
   selector: 'app-main-page',
@@ -14,7 +15,8 @@ import {Hotel} from "../../model/hotel";
     RouterOutlet,
     StarRatingComponent,
     TextCutPipe,
-    NgIf
+    NgIf,
+    GoogleMap
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
