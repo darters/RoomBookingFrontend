@@ -3,6 +3,7 @@ export interface Hotel {
   title: string;
   description: string;
   photoUrl: string;
+  address: string
   numberOfRooms: number;
   roomRating: number;
   pricePerDay: number;

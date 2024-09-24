@@ -1,0 +1,32 @@
+<div class="main">
+  <div class="find-box">
+    <input [(ngModel)]="cityName" class="search-city" placeholder="Where are you going?">
+    <button class="dropdown-toggle" (click)="toggleDropdown()">Room</button>
+
+    <div *ngIf="isOpen" class="dropdown-menu">
+      <div class="option-container">
+        <span>Room:</span>
+        <div class="filter-box">
+          <button class="counter-btn" (click)="decreaseCount()">-</button>
+          <span class="content-value">{{rooms}}</span>
+          <button class="counter-btn" (click)="increaseCount()">+</button>
+        </div>
+      </div>
+     <div class="option-container">
+       <span>Price:</span>
+        <div class="filter-box">
+          <input [(ngModel)]="minPrice" appOnlyNumbers class="price-range" placeholder="Min">
+          <span>-</span>
+          <input [(ngModel)]="maxPrice" appOnlyNumbers class="price-range" placeholder="Max">
+        </div>
+     </div>
+    </div>
+
+
+    <button (click)="searchAnnouncement()" class="search-btn">Search</button>
+  </div>
+</div>
+
+
+
+

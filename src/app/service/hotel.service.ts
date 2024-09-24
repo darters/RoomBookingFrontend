@@ -12,6 +12,9 @@ export class HotelService {
   public getAllHotels(): Observable<any> {
     return this.httpClient.get<any[]>(this.url + 'getAll')
   }
+  public getHotelByCity(city: string) {
+    return this.httpClient.get<any[]>(this.url + `getByCity/${city}`)
+  }
   public getHotel(hotelId: number) {
     return this.httpClient.get(this.url + 'get/' + hotelId, {responseType: "text"})
   }

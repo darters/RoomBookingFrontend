@@ -1,17 +1,19 @@
 <div class="main">
-
   <div class="rooms-container">
-    <div class="room" *ngFor="let room of rooms">
+    <div class="without-rooms"
+         *ngIf="rooms.length == 0">For now, there are no available listings at this location. Please try searching in another area or check back later for new options.</div>
+    <div class="room" *ngFor="let room of rooms" [class.selected]="room.id === selectedRoomId">
       <img src="{{room.photosUrl[0]}}">
       <div class="text-side">
 
         <div class="room-information">
-          <div class="room-name-rating">
+          <div class="room-name">
             <h3>{{room.title | textCut: 24}}</h3>
-            <app-star-rating [rating]="rating"></app-star-rating>
           </div>
+          <app-star-rating [rating]="rating"></app-star-rating>
           <div class="location-text">
-            <img src="assets/img/locationpoint.svg"/>
+            <img src="../../../assets/img/location-point.svg"/>
+            {{ room.address }}
           </div>
           <p>reviews 140</p>
           <div class="short-description">
@@ -21,8 +23,8 @@
         </div>
 
         <div class="manage-block">
-          <img (click)="addToFavorites(room)" class="favorite-img" *ngIf="!room.isFavorite" src="assets/img/heartunfill.svg">
-          <img (click)="addToFavorites(room)" class="favorite-img" *ngIf="room.isFavorite" src="assets/img/heartfill.svg">
+          <img (click)="addToFavorites(room)" class="favorite-img" *ngIf="!room.isFavorite" src="../../../assets/img/heart-unfill.svg">
+          <img (click)="addToFavorites(room)" class="favorite-img" *ngIf="room.isFavorite" src="../../../assets/img/heart-fill.svg">
           <span class="price">{{ room.pricePerDay }}</span>
           <p>per a night</p>
           <button>Go to site</button>
@@ -33,11 +35,7 @@
   </div>
   <div class="right-side">
     <div class="hotel-map">
-
-      <google-map
-        height="100%"
-        width="100%"/>
-
+      <div id="map"></div>
     </div>
   </div>
 

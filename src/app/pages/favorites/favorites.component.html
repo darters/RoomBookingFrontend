@@ -11,7 +11,7 @@
           <app-star-rating [rating]="rating"></app-star-rating>
         </div>
         <div class="location-text">
-          <img src="assets/img/locationpoint.svg"/>
+          <img src="../../../assets/img/location-point.svg"/>
         </div>
         <p>reviews 140</p>
         <div class="short-description">
@@ -21,9 +21,9 @@
       </div>
 
       <div class="manage-block">
-        <img (click)="addToFavorites(room)" class="favourite-img" *ngIf="!room.isFavorite" src="assets/img/heartunfill.svg">
-        <img (click)="addToFavorites(room)" class="favourite-img" *ngIf="room.isFavorite" src="assets/img/heartfill.svg">
-        <!--          <img (click)="addToFavorites(room)" class="favourite-img" src="assets/img/heartunfill.svg">-->
+        <img (click)="addToFavorites(room)" class="favourite-img" *ngIf="!room.isFavorite" src="assets/img/heart-unfill.svg">
+        <img (click)="addToFavorites(room)" class="favourite-img" *ngIf="room.isFavorite" src="../../../assets/img/heart-fill.svg">
+        <!--          <img (click)="addToFavorites(room)" class="favourite-img" src="assets/img/heart-unfill.svg">-->
         <span class="price">{{ room.pricePerDay }}</span>
         <p>a night</p>
         <button>Go to site</button>

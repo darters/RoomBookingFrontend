@@ -1,0 +1,123 @@
+$primary-color: #010d4d;
+$secondary-color: #dedede;
+
+* {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+.search-city {
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+.search-city:focus {
+  outline: 1px solid $primary-color;
+}
+
+.find-box {
+  display: flex;
+  gap: 5px;
+  width: 70%;
+  align-content: center;
+  justify-content: center;
+}
+.main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  margin-top: 50px;
+  align-content: center;
+  justify-content: center;
+  position: relative;
+}
+
+.search-btn {
+  background-color: $primary-color;
+  color: $secondary-color;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+.search-btn:hover {
+  background-color: #001894;
+}
+button {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+
+.dropdown-toggle {
+  color: $primary-color;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+  top: 140%;
+  right: 15%;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  padding: 10px;
+  z-index: 1000;
+}
+
+.room-counter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.counter-value {
+  font-size: 18px;
+  text-align: center;
+  width: 30px;
+}
+span {
+  color: $primary-color;
+}
+.option-container {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+.counter-btn {
+  padding: 5px;
+  width: 40px;
+  border-radius: 5px;
+  color: $primary-color;
+  font-family: "Montserrat", sans-serif;
+  background: none;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+.price-range {
+  width: 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 5px;
+  border: none;
+}
+.price-range:focus {
+  outline: 1px solid $primary-color;
+}
+.filter-box {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+}

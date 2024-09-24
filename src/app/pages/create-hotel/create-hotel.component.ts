@@ -5,7 +5,6 @@ import {trimValidator} from "../../validators/trimValidator";
 import {GoogleMap, MapAdvancedMarker, MapMarker} from "@angular/google-maps";
 import {HotelService} from "../../service/hotel.service";
 import {Router} from "@angular/router";
-import mapStyles from '../../../assets/map_styles.json';
 
 
 @Component({
@@ -24,17 +23,14 @@ import mapStyles from '../../../assets/map_styles.json';
   styleUrl: './create-hotel.component.scss'
 })
 export class CreateHotelComponent implements OnInit {
-  @ViewChild('mapRef') mapRef!: GoogleMap;
-
+  @ViewChild('map') map!: GoogleMap;
   createHotelForm!: FormGroup
   isValidFilesType: boolean = true
   isValidFilesCount: boolean = true
   isValidAddress: boolean = true
   address: string = '';
   marker: google.maps.Marker | null = null;
-
   files: File[] = []
-
   center: google.maps.LatLngLiteral = { lat: 50, lng: 10 };
   zoom = 5;
   options: google.maps.MapOptions = {
@@ -42,8 +38,7 @@ export class CreateHotelComponent implements OnInit {
     mapTypeControl: false,
     streetViewControl: false,
     scaleControl: false,
-    rotateControl: false,
-    styles: mapStyles
+    rotateControl: false
   };
 
   constructor(private formBuilder: FormBuilder,
@@ -69,27 +64,33 @@ export class CreateHotelComponent implements OnInit {
     } else {
       this.marker = new google.maps.Marker({
         position: {lat, lng},
-        map: this.mapRef.googleMap,
-        title: "Hotel Location"
-
+        icon: {
+          url: 'assets/img/location-point.svg',
+          scaledSize: new google.maps.Size(40, 40)
+        },
+        map: this.map.googleMap
       });
     }
     geocoder.geocode({ location: latLng }, (results, status) => {
       if (status === 'OK' && results && results[0]) {
         const address = results[0].formatted_address;
-        this.address = address;
+        this.address = this.cleanAddress(address);
+        this.createHotelForm.patchValue( { address: this.address })
         this.checkAddressValid()
       }
     });
   }
-
+  cleanAddress(address: string): string {
+    const olcRegex = /^[A-Z0-9\+]+\s+/;
+    return address.replace(olcRegex, '').trim()
+  }
   ngOnInit(): void {
     this.createHotelForm = this.formBuilder.group({
         title: ['', [ trimValidator(), Validators.required, Validators.minLength(3), Validators.maxLength(35)]],
         description: ['', [ trimValidator(), Validators.required, Validators.minLength(100), Validators.maxLength(300)]],
         rooms: [null, [ trimValidator(), Validators.required, Validators.min(1), Validators.max(30) ]],
         pricePerDay: [null, [ trimValidator(), Validators.required, Validators.min(1), Validators.max(900000)]],
-
+        address: ['', Validators.required],
         latitude: [null, Validators.required],
         longitude: [null, Validators.required]
       }
@@ -118,15 +119,10 @@ export class CreateHotelComponent implements OnInit {
 
   submit(): void {
     console.log(this.createHotelForm.value);
-    console.log("Form was submitted");
     if (this.isValidAddress && this.isValidFilesCount && this.createHotelForm.valid) {
-      console.log("Form was correct")
-
       this.hotelService.createHotel(this.createHotelForm.value, this.files).subscribe((response: any) => {
-        console.log("ROOM")
-        console.log(response)
-        this.router.navigate([''])
       })
+      this.router.navigate([''])
     }
     this.checkAddressValid()
     this.checkCountOfFiles()
