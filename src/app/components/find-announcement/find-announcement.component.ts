@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {OnlyNumbersDirective} from "../directive/only-numbers.directive";
@@ -16,17 +16,15 @@ import {Router} from "@angular/router";
   styleUrl: './find-announcement.component.scss'
 })
 export class FindAnnouncementComponent {
-  cityName: string = ''
+  @Output() searchParams = new EventEmitter<{ city: string, rooms: number, minPrice: number, maxPrice: number}>()
+  invalidPriceRange: boolean = false
   isOpen: boolean = false
+  wasOpened: boolean = false
   rooms: number = 0
   minPrice: number = 0
   maxPrice: number = 0
 
-  constructor(private router: Router) {
-  }
-
-  toggleDropdown() {
-    this.isOpen = !this.isOpen
+  constructor() {
   }
   increaseCount() {
     this.rooms++
@@ -36,14 +34,39 @@ export class FindAnnouncementComponent {
       this.rooms--
     }
   }
-
-  searchAnnouncement() {
-    this.checkValidPriceRange()
+  toggleDropdown() {
+    this.wasOpened = true
+    this.isOpen = !this.isOpen
+  }
+  searchAnnouncement(textFromInput: HTMLInputElement) {
+    if(this.checkPriceRange()) {
+      this.searchIfValid(textFromInput.value)
+      if (this.wasOpened) this.toggleDropdown()
+    }
   }
 
-  checkValidPriceRange() {
+  checkPriceRange(): boolean {
     if(this.minPrice > this.maxPrice) {
       [this.minPrice, this.maxPrice] = [this.maxPrice, this.minPrice];
     }
+    if(this.minPrice != 0 && this.minPrice == this.maxPrice) {
+      this.invalidPriceRange = true
+      return false;
+    }
+    this.invalidPriceRange = false
+    return true;
   }
+  searchIfValid(textFromInput: string) {
+    if (textFromInput.trim().length > 1) {
+      this.searchParams.emit({
+        city: textFromInput,
+        rooms: this.rooms,
+        minPrice: this.minPrice,
+        maxPrice: this.maxPrice
+      })
+    }
+  }
+
+
+
 }

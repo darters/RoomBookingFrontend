@@ -5,6 +5,7 @@ import {trimValidator} from "../../validators/trimValidator";
 import {GoogleMap, MapAdvancedMarker, MapMarker} from "@angular/google-maps";
 import {HotelService} from "../../service/hotel.service";
 import {Router} from "@angular/router";
+import {OnlyNumbersDirective} from "../../components/directive/only-numbers.directive";
 
 
 @Component({
@@ -17,7 +18,8 @@ import {Router} from "@angular/router";
     NgForOf,
     GoogleMap,
     MapMarker,
-    MapAdvancedMarker
+    MapAdvancedMarker,
+    OnlyNumbersDirective
   ],
   templateUrl: './create-hotel.component.html',
   styleUrl: './create-hotel.component.scss'

@@ -1,6 +1,6 @@
 <div class="main">
   <div class="find-box">
-    <input [(ngModel)]="cityName" class="search-city" placeholder="Where are you going?">
+    <input (keydown.enter)="searchAnnouncement(cityName)" #cityName class="search-city" placeholder="Where are you going?">
     <button class="dropdown-toggle" (click)="toggleDropdown()">Room</button>
 
     <div *ngIf="isOpen" class="dropdown-menu">
@@ -20,10 +20,10 @@
           <input [(ngModel)]="maxPrice" appOnlyNumbers class="price-range" placeholder="Max">
         </div>
      </div>
+     <div class="error" *ngIf="invalidPriceRange">Invalid price range!</div>
     </div>
 
-
-    <button (click)="searchAnnouncement()" class="search-btn">Search</button>
+    <button (click)="searchAnnouncement(cityName)" [(ngModel)]="cityName" class="search-btn">Search</button>
   </div>
 </div>
 

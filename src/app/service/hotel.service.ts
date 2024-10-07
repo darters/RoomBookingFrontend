@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {FilterListingDTO} from "../model/filterListingDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,20 @@ export class HotelService {
   }
   public getAllHotels(): Observable<any> {
     return this.httpClient.get<any[]>(this.url + 'getAll')
+  }
+  public getListingsWthFilters(filter: FilterListingDTO) {
+    let params = new HttpParams()
+      .set('city', filter.city)
+    if (filter.rooms != null) {
+      params = params.set('rooms', filter.rooms.toString());
+    }
+    if (filter.minPrice != null) {
+      params = params.set('minPrice', filter.minPrice.toString());
+    }
+    if (filter.maxPrice != null) {
+      params = params.set('maxPrice', filter.maxPrice.toString());
+    }
+    return this.httpClient.get<any[]>(this.url + 'filter', { params });
   }
   public getHotelByCity(city: string) {
     return this.httpClient.get<any[]>(this.url + `getByCity/${city}`)

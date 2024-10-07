@@ -41,14 +41,14 @@
       <div class="details-info">
         <div class="info-column">
           <span>Rooms</span>
-          <input formControlName="rooms" placeholder="" class="rooms choose">
+          <input appOnlyNumbers formControlName="rooms" placeholder="" class="rooms choose">
           <div class="error" *ngIf="createHotelForm.controls['rooms'].errors && createHotelForm.controls['rooms']?.['touched']">
             The field is required
           </div>
         </div>
         <div class="info-column">
           <span>Price a night $</span>
-          <input formControlName="pricePerDay" placeholder="" class="price choose">
+          <input appOnlyNumbers formControlName="pricePerDay" placeholder="" class="price choose">
           <div class="error" *ngIf="createHotelForm.controls['pricePerDay'].errors && createHotelForm.controls['pricePerDay']?.['touched']">
             The field is required
           </div>

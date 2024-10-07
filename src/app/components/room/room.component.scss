@@ -1,0 +1,115 @@
+$primary-color: #010d4d;
+$secondary-color: #dedede;
+
+* {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.room {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  height: 25vh;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  img {
+    height: 100%;
+    width: 30%;
+    object-fit: cover;
+  }
+}
+
+.location-text {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 500;
+  img {
+    width: 18px;
+    height: 18px;
+  }
+}
+.room-information {
+  display: flex;
+  flex-direction: column;
+  h3 {
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    font-size: 11px;
+    color: #424242;
+    cursor: pointer;
+  }
+}
+.room-name {
+  display: flex;
+  align-items: center;
+  app-star-rating {
+    margin-bottom: -7px;
+  }
+}
+span {
+  font-size: 14px;
+}
+.short-description {
+  margin-top: 10px;
+  font-size: 12px;
+  word-break: break-word;
+}
+
+
+
+.text-side {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2%;
+}
+.manage-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  .price {
+    color: $primary-color;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .favorite-img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: auto;
+    align-self: flex-end;
+    cursor: pointer;
+  }
+  p {
+    font-size: 12px;
+    color: #424242;
+    cursor: pointer;
+    margin:  0 0 15px 0;
+  }
+  button {
+    background-color: $primary-color;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    width: 20vh;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+  button:hover {
+    background-color: #06068d;
+  }
+}
+
+.room.selected {
+  border: 4px solid $primary-color;
+}

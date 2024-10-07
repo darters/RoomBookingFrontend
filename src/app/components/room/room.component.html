@@ -1,0 +1,31 @@
+<!--<div class="room" *ngFor="let room of rooms" [class.selected]="room.id === selectedRoomId">-->
+<div class="room">
+  <img src="{{room.photosUrl[0]}}">
+  <div class="text-side">
+
+    <div class="room-information">
+      <div class="room-name">
+        <h3>{{room.title | textCut: 24}}</h3>
+      </div>
+      <app-star-rating [rating]="rating"></app-star-rating>
+      <div class="location-text">
+        <img src="../../../assets/img/location-point.svg"/>
+        {{ room.address }}
+      </div>
+      <p>reviews 140</p>
+      <div class="short-description">
+        {{room.description | textCut: 350}}
+      </div>
+
+    </div>
+
+    <div class="manage-block">
+      <img (click)="addToFavorites(room)" class="favorite-img" *ngIf="!room.isFavorite" src="../../../assets/img/heart-unfill.svg">
+      <img (click)="addToFavorites(room)" class="favorite-img" *ngIf="room.isFavorite" src="../../../assets/img/heart-fill.svg">
+      <span class="price">{{ room.pricePerDay }}</span>
+      <p>per a night</p>
+      <button>Go to site</button>
+    </div>
+  </div>
+
+</div>
