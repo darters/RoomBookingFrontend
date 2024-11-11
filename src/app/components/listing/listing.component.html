@@ -1,0 +1,30 @@
+<div class="listing">
+  <img src="{{listing.photosUrl[0]}}">
+  <div class="text-side">
+
+    <div class="listing-information">
+      <div class="listing-name">
+        <h3>{{listing.title | textCut: 24}}</h3>
+      </div>
+      <app-star-rating [rating]="rating"></app-star-rating>
+      <div class="location-text">
+        <img src="../../../assets/img/location-point.svg"/>
+        {{ listing.address }}
+      </div>
+      <p>reviews 140</p>
+      <div class="short-description">
+        {{listing.description | textCut: 350}}
+      </div>
+
+    </div>
+
+    <div class="manage-block">
+      <img (click)="addToFavorites(listing)" class="favorite-img" *ngIf="!listing.isFavorite" src="../../../assets/img/heart-unfill.svg">
+      <img (click)="addToFavorites(listing)" class="favorite-img" *ngIf="listing.isFavorite" src="../../../assets/img/heart-fill.svg">
+      <span class="price">{{ listing.pricePerDay }}</span>
+      <p>per a night</p>
+      <button>Go to site</button>
+    </div>
+  </div>
+
+</div>

@@ -2,14 +2,14 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {StarRatingComponent} from "../../star-rating/star-rating.component";
 import {TextCutPipe} from "../../pipes/text-cut.pipe";
-import {Hotel} from "../../model/hotel";
 import {GoogleMap, MapAdvancedMarker, MapMarker} from "@angular/google-maps";
 import {FormsModule} from "@angular/forms";
 import {FindAnnouncementComponent} from "../../components/find-announcement/find-announcement.component";
 import {MapComponent} from "../../components/map/map.component";
-import {RoomComponent} from "../../components/room/room.component";
-import {HotelService} from "../../service/hotel.service";
+import {ListingService} from "../../service/listing.service";
 import {FilterListingDTO} from "../../model/filterListingDTO";
+import {Listing} from "../../model/listing";
+import {ListingComponent} from "../../components/listing/listing.component";
 
 @Component({
   selector: 'app-main-page',
@@ -25,8 +25,8 @@ import {FilterListingDTO} from "../../model/filterListingDTO";
     FormsModule,
     FindAnnouncementComponent,
     MapComponent,
-    RoomComponent,
-    NgClass
+    NgClass,
+    ListingComponent
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss'
@@ -34,44 +34,36 @@ import {FilterListingDTO} from "../../model/filterListingDTO";
 export class MainPageComponent implements OnInit {
   @ViewChild(MapComponent) mapComponentRef!: MapComponent;
 
-  roomsOut: any[] = []
-  rooms: Hotel[] = []
-  favorites: Hotel[] = []
-  filteredRooms: Hotel[] = []
-  selectedRoom: any
+  listingsOut: Listing[] = []
+  listings: Listing[] = []
+  favorites: Listing[] = []
+  filteredListings: Listing[] = []
+  selectedListing: any
 
   isSearched: boolean = false
   isSearchedSuccessful: boolean = false
-  constructor(private hotelService: HotelService) {
+  constructor(private hotelService: ListingService) {
   }
   ngOnInit(): void {
-    this.filteredRooms = this.rooms
+    this.filteredListings = this.listings
   }
   searchListingWithFilters(searchParams: FilterListingDTO) {
-    this.hotelService.getListingsWthFilters(searchParams).subscribe((hotels: any) => {
-      this.roomsOut = hotels
+    this.hotelService.getListingsWthFilters(searchParams).subscribe((listings: Listing[]) => {
+      this.listingsOut = listings
       this.isSearched = true
-      this.isSearchedSuccessful = hotels.length != 0;
-
-      const mapComponent = this.mapComponentRef as MapComponent;
-      mapComponent.createMarkers(this.roomsOut, mapComponent.advancedMarkerElement);
+      if(listings.length != 0) {
+        this.isSearchedSuccessful = true
+        this.mapComponentRef.createMarkers(this.listingsOut, this.mapComponentRef.advancedMarkerElement);
+      }
     })
   }
-  onSelectRoom(room: any) {
-    this.selectedRoom = []
-    this.selectedRoom = room
-    console.log(room)
+  onSelectListing(listing: Listing) {
+    this.selectedListing = []
+    this.selectedListing = listing
   }
 
-  // TODO Realize the filters
   search(searchParams: { city: string, minPrice: number, maxPrice: number, rooms: number}) {
     this.searchListingWithFilters(searchParams)
-    console.log(
-      searchParams.city,
-      searchParams.rooms,
-      searchParams.minPrice,
-      searchParams.maxPrice
-    )
   }
 
 }

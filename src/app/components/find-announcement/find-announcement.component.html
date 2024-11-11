@@ -1,4 +1,4 @@
-<div class="main">
+<header class="main">
   <div class="find-box">
     <input (keydown.enter)="searchAnnouncement(cityName)" #cityName class="search-city" placeholder="Where are you going?">
     <button class="dropdown-toggle" (click)="toggleDropdown()">Room</button>
@@ -23,9 +23,9 @@
      <div class="error" *ngIf="invalidPriceRange">Invalid price range!</div>
     </div>
 
-    <button (click)="searchAnnouncement(cityName)" [(ngModel)]="cityName" class="search-btn">Search</button>
+    <button (click)="searchAnnouncement(cityName)" class="search-btn">Search</button>
   </div>
-</div>
+</header>
 
 
 

@@ -2,8 +2,8 @@ import {Component, OnInit, Output} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {StarRatingComponent} from "../../star-rating/star-rating.component";
 import {TextCutPipe} from "../../pipes/text-cut.pipe";
-import {Hotel} from "../../model/hotel";
 import EventEmitter from "events";
+import {Listing} from "../../model/listing";
 
 @Component({
   selector: 'app-favorites',
@@ -20,7 +20,7 @@ import EventEmitter from "events";
 export class FavoritesComponent implements OnInit {
   favoritesRooms!: any
   rating: number = 1.5
-  favorites!: Hotel[]
+  favorites!: Listing[]
   @Output() newItemEvent = new EventEmitter<any>();
   constructor() {
   }
@@ -30,14 +30,14 @@ export class FavoritesComponent implements OnInit {
     this.favorites = JSON.parse(sessionStorage.getItem('favorites'))
     console.log(this.favorites)
   }
-  addToFavorites(room: Hotel) {
+  addToFavorites(room: Listing) {
     const key = 'favorites'
     if(!room.isFavorite) {
       this.favorites.push(room)
       sessionStorage.setItem(key, JSON.stringify(this.favorites));
       console.log(sessionStorage.getItem(key))
     } else {
-      this.favorites = this.favorites.filter((r: Hotel) => r.id != room.id)
+      this.favorites = this.favorites.filter((r: Listing) => r.id != room.id)
       // @ts-ignore
       sessionStorage.setItem(key, JSON.stringify(this.favorites))
 

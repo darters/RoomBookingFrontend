@@ -1,4 +1,5 @@
 <app-find-announcement (searchParams)="search($event)"></app-find-announcement>
+
 <div *ngIf="!isSearched" class="search-text">
   <span>Please search the room</span>
 </div>
@@ -6,14 +7,15 @@
   <span> For now, there are no available listings at this location. Please try searching in another area or check back later for new options.</span>
 </div>
 
+<!--TODO-->
 <div *ngIf="isSearchedSuccessful" class="main">
-  <div class="rooms-container">
-     <div *ngFor="let room of roomsOut" [ngClass]="{'selected': room.id === selectedRoom}">
-      <app-room [room]="room"></app-room>
+  <div class="listings-container">
+     <div *ngFor="let listing of listingsOut" [ngClass]="{'selected': listing.id === selectedListing}">
+      <app-listing [listing]="listing"></app-listing>
     </div>
   </div>
   <div class="right-side">
-    <app-map (selectedRoom)="onSelectRoom($event)" [rooms]="roomsOut"></app-map>
+    <app-map (selectedListing)="onSelectListing($event)" [listings]="listingsOut"></app-map>
   </div>
 </div>
 

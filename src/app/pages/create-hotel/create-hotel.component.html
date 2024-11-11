@@ -41,8 +41,8 @@
       <div class="details-info">
         <div class="info-column">
           <span>Rooms</span>
-          <input appOnlyNumbers formControlName="rooms" placeholder="" class="rooms choose">
-          <div class="error" *ngIf="createHotelForm.controls['rooms'].errors && createHotelForm.controls['rooms']?.['touched']">
+          <input appOnlyNumbers formControlName="numberOfRooms" placeholder="" class="rooms choose">
+          <div class="error" *ngIf="createHotelForm.controls['numberOfRooms'].errors && createHotelForm.controls['rooms']?.['touched']">
             The field is required
           </div>
         </div>

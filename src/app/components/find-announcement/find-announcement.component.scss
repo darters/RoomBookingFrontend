@@ -19,9 +19,15 @@ $secondary-color: #dedede;
 .find-box {
   display: flex;
   gap: 5px;
+  top: 45px;
   width: 70%;
+  position: fixed;
   align-content: center;
   justify-content: center;
+  z-index: 100000;
+  padding: 5px 30% 5px 30%;
+  background-color: $primary-color;
+
 }
 .main {
   padding: 10px;
@@ -30,8 +36,6 @@ $secondary-color: #dedede;
   display: flex;
   align-content: center;
   justify-content: center;
-  position: relative;
-  background-color: $primary-color;
 }
 
 .search-btn {

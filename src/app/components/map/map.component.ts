@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Hotel} from "../../model/hotel";
+import {Listing} from "../../model/listing";
 
 @Component({
   selector: 'app-map',
@@ -9,18 +9,18 @@ import {Hotel} from "../../model/hotel";
   styleUrl: './map.component.scss'
 })
 export class MapComponent implements OnInit {
-  @Input() rooms: Hotel[] = []
-  @Output() selectedRoom = new EventEmitter<any>()
-  favorites: Hotel[] = []
-  selectedRoomId: number = 0
+  @Input() listings: Listing[] = []
+  @Output() selectedListing = new EventEmitter<any>()
+  favorites: Listing[] = []
+  selectedListingId: number = 0
 
   private markers: google.maps.Marker[] = [];
   private map: google.maps.Map | undefined;
   advancedMarkerElement: any;
   ngOnInit(): void {
-    this.initMap(this.rooms)
+    this.initMap(this.listings)
   }
-  async initMap(rooms: Hotel[]) {
+  async initMap(listings: Listing[]) {
     const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
     this.advancedMarkerElement = AdvancedMarkerElement;
@@ -30,26 +30,26 @@ export class MapComponent implements OnInit {
       zoom: 4,
       mapId: '4504f8b37365c3d0',
     });
-    await this.createMarkers(rooms, this.advancedMarkerElement)
+    await this.createMarkers(listings, this.advancedMarkerElement)
   }
-  async createMarkers(rooms: Hotel[], AdvancedMarkerElement: any) {
+  async createMarkers(listings: Listing[], AdvancedMarkerElement: any) {
     if (!this.map) return;
     this.clearMarkers();
 
-    rooms.forEach(room => {
+    listings.forEach(listing => {
       const priceTag = document.createElement('div');
       priceTag.className = 'price-tag';
-      priceTag.textContent = `${room.pricePerDay}`;
+      priceTag.textContent = `${listing.pricePerDay}`;
 
       const marker = new AdvancedMarkerElement({
         map: this.map,
-        position: {lat: room.latitude, lng: room.longitude},
+        position: {lat: listing.latitude, lng: listing.longitude},
         content: priceTag
       });
 
       marker.addListener('click', () => {
-        this.selectedRoomId = room.id;
-        this.selectedRoom.emit(this.selectedRoomId);
+        this.selectedListingId = listing.id;
+        this.selectedListing.emit(this.selectedListingId);
       });
 
       this.markers.push(marker);

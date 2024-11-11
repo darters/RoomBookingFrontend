@@ -10,7 +10,7 @@ $secondary-color: #dedede;
   flex-direction: row;
 }
 
-.rooms-container {
+.listings-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -49,3 +49,6 @@ span {
   width: 100%;
 }
 
+.announcement-container {
+  position: fixed;
+}

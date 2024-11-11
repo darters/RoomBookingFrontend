@@ -3,9 +3,10 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import {NgForOf, NgIf} from "@angular/common";
 import {trimValidator} from "../../validators/trimValidator";
 import {GoogleMap, MapAdvancedMarker, MapMarker} from "@angular/google-maps";
-import {HotelService} from "../../service/hotel.service";
+import {ListingService} from "../../service/listing.service";
 import {Router} from "@angular/router";
 import {OnlyNumbersDirective} from "../../components/directive/only-numbers.directive";
+import {CreateListing} from "../../model/createListing";
 
 
 @Component({
@@ -44,7 +45,7 @@ export class CreateHotelComponent implements OnInit {
   };
 
   constructor(private formBuilder: FormBuilder,
-              private hotelService: HotelService,
+              private hotelService: ListingService,
               private router: Router) {
   }
 
@@ -90,7 +91,7 @@ export class CreateHotelComponent implements OnInit {
     this.createHotelForm = this.formBuilder.group({
         title: ['', [ trimValidator(), Validators.required, Validators.minLength(3), Validators.maxLength(35)]],
         description: ['', [ trimValidator(), Validators.required, Validators.minLength(100), Validators.maxLength(300)]],
-        rooms: [null, [ trimValidator(), Validators.required, Validators.min(1), Validators.max(30) ]],
+        numberOfRooms: [null, [ trimValidator(), Validators.required, Validators.min(1), Validators.max(30) ]],
         pricePerDay: [null, [ trimValidator(), Validators.required, Validators.min(1), Validators.max(900000)]],
         address: ['', Validators.required],
         latitude: [null, Validators.required],
@@ -113,16 +114,18 @@ export class CreateHotelComponent implements OnInit {
       this.checkCountOfFiles()
     }
 
-}
+  }
   removeFile(file: File): void {
     this.files = this.files.filter(f => f !== file);
     this.checkCountOfFiles()
   }
-
   submit(): void {
-    console.log(this.createHotelForm.value);
     if (this.isValidAddress && this.isValidFilesCount && this.createHotelForm.valid) {
-      this.hotelService.createHotel(this.createHotelForm.value, this.files).subscribe((response: any) => {
+      const listingCreateRequest: CreateListing = {
+        listing: this.createHotelForm.value,
+        photoFiles: this.files
+      }
+      this.hotelService.createListing(listingCreateRequest).subscribe((response: any) => {
       })
       this.router.navigate([''])
     }
@@ -133,18 +136,11 @@ export class CreateHotelComponent implements OnInit {
       control?.markAsTouched({ onlySelf: true });
     });
   }
+
   private checkCountOfFiles() {
-    if(this.files.length > 4 && this.files.length < 20) {
-      this.isValidFilesCount = true
-    } else {
-      this.isValidFilesCount = false
-    }
+    this.isValidFilesCount = this.files.length > 4 && this.files.length < 20;
   }
   private checkAddressValid() {
-    if(this.address.length > 5) {
-      this.isValidAddress = true
-    } else {
-      this.isValidAddress = false
-    }
+    this.isValidAddress = this.address.length > 5;
   }
 }
